@@ -15,7 +15,7 @@ Before running the code, make sure you have the following dependencies installed
 - - ColorSchemes
 - - GeometryBasics
 
-All the packages will be installed in the first run.
+All the packages will be installed automatically during the first run.
 
 ## How to Use
 1. Clone this repository:
