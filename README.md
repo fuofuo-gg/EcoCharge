@@ -23,7 +23,7 @@ All the packages will be installed in the first run.
 git clone https://github.com/fuofuo-gg/EcoCharge
 cd EcoCharge
 ```
-2.Run the Julia script:
+2. Run the Julia script:
 ```bash
 julia
 include("./src/ECOCharge.jl")
