@@ -7,8 +7,7 @@ Before running the code, make sure you have the following dependencies installed
 - Julia (version 1.11 or higher) 
 Linux:
 ```bash
-git clone https://github.com/fuofuo-gg/EcoCharge
-cd EcoCharge
+winget install julia -s msstore
 ```
 Windows:
 https://julialang.org/
