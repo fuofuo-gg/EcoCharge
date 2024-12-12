@@ -4,18 +4,24 @@ This project simulates various pricing strategies for two competing electric veh
 
 ## Prerequisites
 Before running the code, make sure you have the following dependencies installed:
-- Julia (version 1.11 or higher) from : https://julialang.org/
-- Required package:
-- - GLMakie.jl
-- - Plots
-- - StatsPlots
-- - MAT
-- - Makie 
-- - GLMakie  
-- - ColorSchemes
-- - GeometryBasics
+- Julia (version 1.11 or higher) 
+Linux:
+```bash
+git clone https://github.com/fuofuo-gg/EcoCharge
+cd EcoCharge
+```
+Windows:
+https://julialang.org/
 
 All the packages will be installed automatically during the first run.
+- GLMakie.jl
+- Plots
+- StatsPlots
+- MAT
+- Makie 
+- GLMakie  
+- ColorSchemes
+- GeometryBasics
 
 ## How to Use
 1. Clone this repository:
