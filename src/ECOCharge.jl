@@ -232,8 +232,8 @@ function add_game_results(z1, z2, Minimax, Sharpe, Stackelberg, Shapley, win_win
             end
         end
         posA = argmax(z)
-        Save_triangle_plot_true[posA[1],posA[2]][].color = "steelblue"
-        Save_triangle_plot_false[posA[1],posA[2]][].color = "steelblue"
+        Save_triangle_plot_true[posA[1],posA[2]][].color = "orangered4"
+        Save_triangle_plot_false[posA[1],posA[2]][].color = "orangered4"
         val_label_tsA.text[] = string("Earnings A :", round(Int, A2[posA[1],posA[2]]))
         val_label_tsB.text[] = string("B :", round(Int, B2[posA[1],posA[2]]))
         println(round(Int, B2[posA[1],posA[2]]))
@@ -374,7 +374,7 @@ val_label_trA.text[] = string("Earnings A : -----")
 val_label_trB.text[] = string("B : -----")
 
 Label(gl[3, 2], "Collaborative Informed", halign = :left)
-ts = Toggle(gl[3, 1], active = false, buttoncolor = "steelblue")
+ts = Toggle(gl[3, 1], active = false, buttoncolor = "orangered4")
 val_label_tsA = Label(gl[3,4], width = nothing, color = :black, halign = :left)
 val_label_tsB = Label(gl[3,17], width = nothing, color = :black, halign = :left)
 val_label_tsA.text[] = string("Earnings A : -----")
