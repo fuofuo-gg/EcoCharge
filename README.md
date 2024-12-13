@@ -5,6 +5,7 @@ This project simulates various pricing strategies for two competing electric veh
 ## Prerequisites
 Before running the code, make sure you have the following dependencies installed:
 
+git
 Julia (version 1.11 or higher) 
 
 Linux:
