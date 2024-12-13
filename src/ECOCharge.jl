@@ -264,7 +264,6 @@ function split_heatmap(x, y, z1, z2, Minimax, Sharpe, Stackelberg, Shapley, win_
     add_game_results(z1, z2, Minimax, Sharpe, Stackelberg, Shapley, win_win)
 end
 
-
 file = matopen("./saveJ_v2_sym.mat")
 J_data = read(file, "saveJ")
 close(file)
@@ -325,8 +324,8 @@ colorbar = Colorbar(fig[2:6, 11], colormap=cmap, limits=(min(minimum(z1), minimu
 split_heatmap(x,y,z1,z2, Minimax, Sharpe, Stackelberg, Shapley, win_win)
 
 menu = Makie.Menu(fig, options = ["Earnings A+B", "Nominal Non-Collaborative \nNon-Informed for A", 
-        "Nominal Non-Collaborative \nNon-Informed for B", "Refined Non-Collaborative \nNon-Informed for A", 
-        "Refined Non-Collaborative \nNon-Informed for B", "Non-Collaborative \nInformed for A", 
+        "Nominal Non-Collaborative \nNon-Informed for B", "Risk-adjusted Non-Collaborative \nNon-Informed for A", 
+        "Risk-adjusted Non-Collaborative \nNon-Informed for B", "Non-Collaborative \nInformed for A", 
         "Non-Collaborative \nInformed for B", "Collaborative Informed"])
 
 fig[7, 1] = vgrid!(Makie.Label(fig, "Strategy", width = nothing, color = :black),
@@ -360,7 +359,7 @@ fig[7, 3] = vgrid!(
 
 gl = GridLayout(fig[7, 6:8], tellwidth = false)
 
-Label(gl[1, 2], "Refined Non-Collaborative Non-Informed", halign = :left)
+Label(gl[1, 2], "Risk-adjusted Non-Collaborative Non-Informed", halign = :left)
 tq = Toggle(gl[1, 1], active = false, buttoncolor = "violetred2")
 val_label_tqA = Label(gl[1,4], width = nothing, color = :black, halign = :left)
 val_label_tqB = Label(gl[1,17], width = nothing, color = :black, halign = :left)
@@ -482,10 +481,10 @@ Makie.lift(strategy, Cost, Elec, Minimax, Sharpe, Stackelberg, Shapley, win_win,
     elseif s == "Nominal Non-Collaborative \nNon-Informed for B"
         z = MinimaxB(z1, z2)
         ax1.zlabel = "Earnings A+B [\$]"
-    elseif s == "Refined Non-Collaborative \nNon-Informed for A"
+    elseif s == "Risk-adjusted Non-Collaborative \nNon-Informed for A"
         z = SharpeA(z1, z2)
         ax1.zlabel = "Sharpe Value [-]"
-    elseif s == "Refined Non-Collaborative \nNon-Informed for B"
+    elseif s == "Risk-adjusted Non-Collaborative \nNon-Informed for B"
         z = SharpeB(z1, z2)
         ax1.zlabel = "Sharpe Value [-]"
     elseif s == "Non-Collaborative \nInformed for A"
@@ -521,4 +520,3 @@ Makie.lift(strategy, Cost, Elec, Minimax, Sharpe, Stackelberg, Shapley, win_win,
 end
 
 display(fig)
-
