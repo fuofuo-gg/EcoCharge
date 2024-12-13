@@ -6,6 +6,7 @@ This project simulates various pricing strategies for two competing electric veh
 Before running the code, make sure you have the following dependencies installed:
 
 Julia (version 1.11 or higher) 
+
 Linux:
 ```bash
 winget install julia -s msstore
