@@ -40,7 +40,7 @@ include("./src/ECOCharge.jl")
 
 ## Example Output
 Below is an example of the tool:
-![Example Output](images/Annotation_2024-12-11_164253.png)
+![Example Output](images/affichage_makie.png)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
