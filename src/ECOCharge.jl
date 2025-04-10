@@ -7,6 +7,7 @@ Pkg.add("GLMakie")
 Pkg.add("ColorSchemes")
 Pkg.add("GeometryBasics")
 
+
 using MAT 
 using Makie
 using GLMakie
@@ -236,7 +237,7 @@ function add_game_results(z1, z2, Minimax, Sharpe, Stackelberg, Shapley, win_win
         Save_triangle_plot_false[posA[1],posA[2]][].color = "orangered4"
         val_label_tsA.text[] = string("Earnings A :", round(Int, A2[posA[1],posA[2]]))
         val_label_tsB.text[] = string("B :", round(Int, B2[posA[1],posA[2]]))
-        println(round(Int, B2[posA[1],posA[2]]))
+        #println(round(Int, B2[posA[1],posA[2]]))
     end
 end
 
@@ -323,10 +324,9 @@ colorbar = Colorbar(fig[2:6, 11], colormap=cmap, limits=(min(minimum(z1), minimu
 
 split_heatmap(x,y,z1,z2, Minimax, Sharpe, Stackelberg, Shapley, win_win)
 
-menu = Makie.Menu(fig, options = ["Earnings A+B", "Nominal Non-Collaborative \nNon-Informed for A", 
-        "Nominal Non-Collaborative \nNon-Informed for B", "Risk-adjusted Non-Collaborative \nNon-Informed for A", 
-        "Risk-adjusted Non-Collaborative \nNon-Informed for B", "Non-Collaborative \nInformed for A", 
-        "Non-Collaborative \nInformed for B", "Collaborative Informed"])
+menu = Makie.Menu(fig, options = ["Earnings A+B", "A-Nominal Non-Collaborative", 
+        "B-Nominal Non-Collaborative", "A-Risk-aware Non-Collaborative", 
+        "B-Risk-aware Non-Collaborative", "Collaborative Informed"])
 
 fig[7, 1] = vgrid!(Makie.Label(fig, "Strategy", width = nothing, color = :black),
                     menu; tellheight = false, width = 350)
@@ -359,29 +359,29 @@ fig[7, 3] = vgrid!(
 
 gl = GridLayout(fig[7, 6:8], tellwidth = false)
 
-Label(gl[1, 2], "Risk-adjusted Non-Collaborative Non-Informed", halign = :left)
+Label(gl[1, 2], "Risk-aware Non-Collaborative", halign = :left)
 tq = Toggle(gl[1, 1], active = false, buttoncolor = "violetred2")
 val_label_tqA = Label(gl[1,4], width = nothing, color = :black, halign = :left)
 val_label_tqB = Label(gl[1,17], width = nothing, color = :black, halign = :left)
 val_label_tqA.text[] = string("Earnings A : -----")
 val_label_tqB.text[] = string("B : -----")
-
+#=
 Label(gl[2, 2], "Non-Collaborative Informed", halign = :left)
 tr = Toggle(gl[2, 1], active = false, buttoncolor = "navyblue")
 val_label_trA = Label(gl[2,4], width = nothing, color = :black, halign = :left)
 val_label_trB = Label(gl[2,17], width = nothing, color = :black, halign = :left)
 val_label_trA.text[] = string("Earnings A : -----")
 val_label_trB.text[] = string("B : -----")
-
-Label(gl[3, 2], "Collaborative Informed", halign = :left)
-ts = Toggle(gl[3, 1], active = false, buttoncolor = "orangered4")
-val_label_tsA = Label(gl[3,4], width = nothing, color = :black, halign = :left)
-val_label_tsB = Label(gl[3,17], width = nothing, color = :black, halign = :left)
+=#
+Label(gl[2, 2], "Collaborative Informed", halign = :left)
+ts = Toggle(gl[2, 1], active = false, buttoncolor = "orangered4")
+val_label_tsA = Label(gl[2,4], width = nothing, color = :black, halign = :left)
+val_label_tsB = Label(gl[2,17], width = nothing, color = :black, halign = :left)
 val_label_tsA.text[] = string("Earnings A : -----")
 val_label_tsB.text[] = string("B : -----")
 
 gm = GridLayout(fig[1, 7:9], tellwidth = false)
-Label(gm[2, 2], "Nominal Non-Collaborative Non-Informed", halign = :left)
+Label(gm[2, 2], "Nominal Non-Collaborative", halign = :left)
 tp = Toggle(gm[2, 1], active = false, buttoncolor = "purple")
 val_label_tpA = Label(gm[2,3], width = nothing, color = :black, halign = :left)
 val_label_tpB = Label(gm[2,16], width = nothing, color = :black, halign = :left)
@@ -420,7 +420,7 @@ on(tq.active) do is_active
         val_label_tqB.text[] = string("B : -----") 
     end
 end
-
+#=
 on(tr.active) do is_active
     Stackelberg[] = is_active 
     if !is_active
@@ -428,7 +428,7 @@ on(tr.active) do is_active
         val_label_trB.text[] = string("B : -----") 
     end
 end
-
+=#
 on(ts.active) do is_active
     Shapley[] = is_active 
     if !is_active
@@ -475,16 +475,16 @@ Makie.lift(strategy, Cost, Elec, Minimax, Sharpe, Stackelberg, Shapley, win_win,
     z2 = zeros(size(J[][:,:,2]))
     z1, z2 = setPriceMatrices(J, Bid, Cost, Elec)
     z = zeros(size(z1))
-    if s == "Nominal Non-Collaborative \nNon-Informed for A"
+    if s == "A-Nominal Non-Collaborative"
         z = MinimaxA(z1, z2)
         ax1.zlabel = "Earnings A+B [\$]"
-    elseif s == "Nominal Non-Collaborative \nNon-Informed for B"
+    elseif s == "B-Nominal Non-Collaborative"
         z = MinimaxB(z1, z2)
         ax1.zlabel = "Earnings A+B [\$]"
-    elseif s == "Risk-adjusted Non-Collaborative \nNon-Informed for A"
+    elseif s == "A-Risk-aware Non-Collaborative"
         z = SharpeA(z1, z2)
         ax1.zlabel = "Sharpe Value [-]"
-    elseif s == "Risk-adjusted Non-Collaborative \nNon-Informed for B"
+    elseif s == "B-Risk-aware Non-Collaborative"
         z = SharpeB(z1, z2)
         ax1.zlabel = "Sharpe Value [-]"
     elseif s == "Non-Collaborative \nInformed for A"
